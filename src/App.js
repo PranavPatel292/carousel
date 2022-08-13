@@ -1,23 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
 
-function App() {
+function App({ classname, numberOfEle = 4 }) {
+  const widthDiv = window.innerWidth / numberOfEle;
+
+  const childern = [
+    "hello",
+    "hello",
+    "hello",
+    "hello",
+    "hello",
+    "hello",
+    "hello",
+    "hello",
+    "hello",
+  ];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="flex">
+      <div className="flex space-x-4">
+        {childern?.map((item, index) => {
+          return (
+            <div
+              key={index}
+              style={{ width: `${widthDiv}px` }}
+              className={`h-auto bg-red-500 ${classname}`}
+            >
+              <h1>{item}</h1>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
