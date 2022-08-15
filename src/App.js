@@ -1,5 +1,15 @@
-import logo from "./logo.svg";
 import { useEffect, useState } from "react";
+
+import {
+  getNextNNodes,
+  getShowNNodes,
+  getPrevNNodes,
+  insert,
+} from "./LinkList";
+
+let showNodes = null;
+let prevNNodeStart = null;
+let nextNNodeStart = null;
 
 function App({ classname, numberOfEle = 4 }) {
   const widthDiv = window.innerWidth / numberOfEle;
@@ -7,19 +17,28 @@ function App({ classname, numberOfEle = 4 }) {
   const [next, setNext] = useState(false);
 
   const childern = [
-    "hello",
-    "hello",
-    "hello",
-    "hello",
-    "hello",
-    "hello",
-    "hello",
-    "hello",
-    "hello",
-    "hello",
-    "hello",
-    "hello",
+    "hello1",
+    "hello2",
+    "hello3",
+    "hello4",
+    "hello5",
+    "hello6",
+    "hello7",
+    "hello8",
+    "hello9",
+    "hello10",
+    "hello11",
+    "hello12",
   ];
+
+  const head = insert(childern);
+
+  let [s, sp, sn] = getShowNNodes(head, 4, "left");
+  showNodes = s;
+  prevNNodeStart = sp;
+  nextNNodeStart = sn;
+
+  console.log(showNodes, prevNNodeStart, nextNNodeStart);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -47,10 +66,7 @@ function App({ classname, numberOfEle = 4 }) {
                   style={{ width: `${widthDiv}px` }}
                   className={`h-auto bg-red-500 ${classname}`}
                 >
-                  <h1>
-                    {item}
-                    {index}
-                  </h1>
+                  <h1>{item}</h1>
                 </div>
               );
             })}
