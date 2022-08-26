@@ -8,7 +8,7 @@ let showNodes = null;
 let prevNNodeStart = null;
 let nextNNodeStart = null;
 
-function App({ classname, numberOfEle = 1 }) {
+function App({ classname, numberOfEle = 2 }) {
   const [initial, setIntial] = useState(true);
 
   const [one, setOne] = useState(0);
@@ -57,6 +57,9 @@ function App({ classname, numberOfEle = 1 }) {
 
     const nextNumber = numberOfEle + 2;
 
+    if (nextNumber === 2) setTwo(nextNNodeStart.value);
+    if (nextNumber === 3) setThree(nextNNodeStart.value);
+    if (nextNumber === 4) setFour(nextNNodeStart.value);
     if (nextNumber === 5) setFive(nextNNodeStart.value);
     if (nextNumber === 6) setSix(nextNNodeStart.value);
     if (nextNumber === 7) setSeven(nextNNodeStart.value);
@@ -75,8 +78,8 @@ function App({ classname, numberOfEle = 1 }) {
     setNext(true);
   };
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
+  const timerFun = () => {
+    setTimeout(() => {
       if (next) {
         let [s, sp, sn] = getShowNNodes(nextNNodeStart, numberOfEle, "right");
 
@@ -107,8 +110,23 @@ function App({ classname, numberOfEle = 1 }) {
       }
       setNext(false);
     }, 1000);
+  };
+
+  useEffect(() => {
+    const timer = timerFun();
     return () => clearTimeout(timer);
   }, [next]);
+
+  // autoplay
+
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     setNext(true);
+  //     const timer = timerFun();
+  //     return () => clearTimeout(timer);
+  //   }, 5000);
+  // }, []);
+
   return (
     <div>
       <div className="flex">
