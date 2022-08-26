@@ -1,0 +1,131 @@
+import { useEffect, useState } from "react";
+
+import {
+  getNextNNodes,
+  getShowNNodes,
+  getPrevNNodes,
+  insert,
+} from "./LinkList";
+import Test from "./testFile";
+
+let showNodes = null;
+let prevNNodeStart = null;
+let nextNNodeStart = null;
+
+function App({ classname, numberOfEle = 4 }) {
+  const [initial, setIntial] = useState(true);
+
+  const [one, setOne] = useState(0);
+  const [two, setTwo] = useState(1);
+  const [three, setThree] = useState(2);
+  const [four, setFour] = useState(3);
+  const [five, setFive] = useState(4);
+  const [six, setSix] = useState(5);
+  const [seven, setSeven] = useState(6);
+  const [eight, setEight] = useState(7);
+
+  const hashMap = {
+    1: "One",
+    2: "Two",
+    3: "Three",
+    4: "Four",
+    5: "Five",
+    6: "Six",
+    7: "Seven",
+    8: "Eight",
+  };
+
+  const childernOfTest = [
+    <Test value={1} />,
+    <Test value={2} />,
+    <Test value={3} />,
+    <Test value={4} />,
+    <Test value={5} />,
+    <Test value={6} />,
+    <Test value={7} />,
+    <Test value={8} />,
+    <Test value={9} />,
+    <Test value={10} />,
+    <Test value={11} />,
+    <Test value={12} />,
+  ];
+
+  const head = insert(childernOfTest);
+
+  const initiate = () => {
+    setIntial(false);
+    for (let i = 0; i < numberOfEle; i++) {
+      if (i == 0) setOne(childernOfTest[i]);
+      if (i == 1) setTwo(childernOfTest[i]);
+      if (i == 2) setThree(childernOfTest[i]);
+      if (i == 3) setFour(childernOfTest[i]);
+      if (i == 4) setFive(childernOfTest[i]);
+      if (i == 5) setSix(childernOfTest[i]);
+    }
+  };
+
+  const widthDiv = window.innerWidth / numberOfEle;
+
+  const updateData = () => {
+    let temp = numberOfEle;
+
+    for (let i = 1; i <= numberOfEle; ++i) {
+      const valueToBeUpdated = hashMap[i + 1];
+    }
+    // setTwo(2);
+  };
+
+  updateData();
+
+  const [next, setNext] = useState(false);
+  const perOfMoving = `translate-x-[-${100 / numberOfEle}%]`;
+
+  // first call.
+  // let [s, sp, sn] = getShowNNodes(head, numberOfEle + 1, "right");
+  // showNodes = s;
+  // prevNNodeStart = sp;
+  // nextNNodeStart = sn;
+
+  console.log(showNodes, prevNNodeStart, nextNNodeStart);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setNext(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [next]);
+
+  const onNextClick = () => {
+    setNext(true);
+  };
+  return (
+    <div>
+      <div className="flex">
+        <div
+          className={`w-full transition-all ease-in duration-75 ${
+            next ? `translate-x-[-50%]` : "translate-x-[-25%]"
+          }`}
+        >
+          <div className={`flex absolute`}>
+            {childernOfTest.map((item, index) => (
+              <div style={{ width: `${widthDiv}px` }} key={index}>
+                {item}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className=" absolute mt-96">
+          <button
+            className="rounded-lg border-2 px-9 border-blue-100"
+            onClick={onNextClick}
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default App;

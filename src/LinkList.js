@@ -64,7 +64,7 @@ const getShowNNodes = (node, n, direction, prevNNodeStart, nextNNodeStart) => {
     prevNNodeStart = node.prev;
 
     while (n !== 0) {
-      temp.push(node.value);
+      temp.push(node);
       node = node.next;
       n -= 1;
     }
@@ -74,7 +74,7 @@ const getShowNNodes = (node, n, direction, prevNNodeStart, nextNNodeStart) => {
     node = node.prev;
     nextNNodeStart = node.next;
     while (n !== 0) {
-      temp.push(node.value);
+      temp.push(node);
       node = node.prev;
       n -= 1;
     }
